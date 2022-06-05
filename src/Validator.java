@@ -18,12 +18,18 @@ public class Validator {
     }
 
     private static void validate(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException {
-        if (Objects.isNull(login) || login.length() > 20 || !containsValidSymbols(login)) {
+        if (Objects.isNull(login) || login.length() > 20 ) {
             throw new WrongLoginException("dlina logina <=20");
+        }
+        if (!containsValidSymbols(login)) {
+            throw new WrongPasswordException("логин содержит невалидные символы");
         }
         //if( checkPassword(password) || checkPassword(confirmPassword)){
         if (isNotValidPassword(password) || isNotValidPassword(confirmPassword)) {
             throw new WrongPasswordException("dlina logina <20");
+        }
+        if (!containsValidSymbols(password)) {
+            throw new WrongPasswordException("пароль содержит невалидные символы");
         }
         if (!password.equals(confirmPassword)) {
             throw new WrongPasswordException("paroli dolzni sovpadat");
